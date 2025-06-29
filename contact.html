@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Contact - Smartphone Market Insights</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+        /* Reset & base */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #e0f0ff 0%, #ffffff 100%);
+            color: #222;
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        a {
+            color: #1e90ff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        a:hover,
+        a:focus {
+            color: #004a99;
+            text-decoration: underline;
+            transform: scale(1.05);
+            outline: none;
+        }
+
+        /* Container */
+        .container {
+            max-width: 900px;
+            margin: 4rem auto 6rem;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeInDown 1s ease forwards;
+        }
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            color: #1e90ff;
+            letter-spacing: 1.5px;
+            font-weight: 800;
+            text-shadow: 1px 1px 6px rgba(30,144,255,0.3);
+        }
+        header p {
+            font-size: 1.3rem;
+            color: #555;
+            font-weight: 500;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Form Styles */
+        form {
+            background: linear-gradient(145deg, #ffffff, #d9eaff);
+            padding: 2.5rem 3rem;
+            border-radius: 20px;
+            box-shadow:
+                0 8px 20px rgba(30, 144, 255, 0.15),
+                inset 0 0 15px rgba(255, 255, 255, 0.7);
+            animation: fadeInUp 1s ease forwards;
+            margin-bottom: 4rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            color: #004a99;
+            font-size: 1.1rem;
+            letter-spacing: 0.02em;
+        }
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            margin-bottom: 1.5rem;
+            border: 2px solid #1e90ff;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            resize: vertical;
+            min-height: 100px;
+        }
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        textarea:focus {
+            border-color: #004a99;
+            box-shadow: 0 0 8px rgba(0, 74, 153, 0.4);
+            outline: none;
+        }
+        textarea {
+            min-height: 140px;
+        }
+
+        /* Submit Button */
+        button[type="submit"] {
+            background: linear-gradient(90deg, #1e90ff, #004a99);
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.15rem;
+            padding: 0.85rem 2rem;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 6px 15px rgba(30, 144, 255, 0.5);
+            transition: background 0.4s ease, transform 0.3s ease;
+            display: inline-block;
+        }
+        button[type="submit"]:hover,
+        button[type="submit"]:focus {
+            background: linear-gradient(90deg, #004a99, #1e90ff);
+            transform: scale(1.05);
+            outline: none;
+        }
+
+        /* Success message */
+        .success-message {
+            background-color: #d4edda;
+            border-left: 6px solid #28a745;
+            color: #155724;
+            padding: 1rem 1.5rem;
+            margin-top: 1rem;
+            border-radius: 10px;
+            font-weight: 600;
+            display: none;
+        }
+
+        /* Developers Section */
+        .developers-section {
+            margin-bottom: 4rem;
+            animation: fadeInUp 1s ease forwards;
+        }
+        .developers-section h2 {
+            color: #004a99;
+            margin-bottom: 2rem;
+            font-weight: 900;
+            font-size: 2.2rem;
+            letter-spacing: 0.03em;
+            text-align: center;
+            text-transform: uppercase;
+            text-shadow: 0 0 6px rgba(0, 74, 153, 0.5);
+        }
+        .developers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 2rem;
+        }
+        .developer-card {
+            background: linear-gradient(145deg, #ffffff, #d9eaff);
+            border-radius: 20px;
+            box-shadow:
+                0 8px 20px rgba(30, 144, 255, 0.15),
+                inset 0 0 15px rgba(255, 255, 255, 0.7);
+            padding: 1.5rem 1.5rem 2rem;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: default;
+        }
+        .developer-card:hover,
+        .developer-card:focus-within {
+            transform: translateY(-6px);
+            box-shadow:
+                0 14px 35px rgba(30, 144, 255, 0.3),
+                inset 0 0 20px rgba(255, 255, 255, 0.9);
+            outline: none;
+        }
+        .developer-photo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: #1e90ff;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            user-select: none;
+            box-shadow: 0 4px 12px rgba(30,144,255,0.4);
+        }
+        .developer-name {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #004a99;
+            margin-bottom: 0.25rem;
+        }
+        .developer-role {
+            font-weight: 600;
+            font-size: 1rem;
+            color: #1e90ff;
+            margin-bottom: 0.75rem;
+            font-style: italic;
+        }
+        .developer-desc {
+            font-size: 0.95rem;
+            color: #34495e;
+            line-height: 1.4;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: #777;
+            font-size: 0.9rem;
+            border-top: 1px solid #d0d7e0;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            background: linear-gradient(90deg, #f0f5ff, #d9eaff);
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* logo */
+
+        .logo-img {
+            height: 220px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            border: #00b4d8 solid 2px;
+            box-shadow: 0 8px 24px rgba(26, 115, 232, 0.2);
+            transition: transform 0.3s ease;
+        }
+        .logo-img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 2.2rem;
+            }
+            form {
+                padding: 2rem 1.5rem;
+                border-radius: 15px;
+            }
+            .developer-card {
+                padding: 1.25rem 1rem 1.5rem;
+            }
+            .developer-photo {
+                width: 80px;
+                height: 80px;
+                font-size: 2.5rem;
+            }
+        }
+            .topnav {
+  background: linear-gradient(90deg, #0073e6 60%, #00b4d8 100%);
+  overflow: hidden;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 4px 16px rgba(0, 115, 230, 0.20);
+  margin-bottom: 40px;
+}
+.topnav a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 22px;
+  text-decoration: none;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: background 0.3s, color 0.3s;
+  border-radius: 6px;
+}
+.topnav a:hover, .topnav a.active {
+  background: #005bb5;
+  color: #fff;
+}
+.topnav .icon {
+  display: none;
+  float: right;
+  padding: 14px 20px;
+  cursor: pointer;
+  font-size: 22px;
+  color: #f2f2f2;
+}
+
+/* Responsive navbar */
+@media screen and (max-width: 768px) {
+  .topnav a:not(:first-child) { display: none; }
+  .topnav a.icon { display: block; }
+  .topnav.responsive { position: relative; }
+  .topnav.responsive a.icon {
+    position: absolute; right: 0; top: 0;
+  }
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+    border-radius: 0;
+  }
+}
+.site-footer {
+  background: linear-gradient(90deg, #0073e6 60%, #0099ff 100%);
+  color: #f2f2f2;
+  padding: 28px 0 18px;
+  border-radius: 14px 14px 0 0;
+  box-shadow: 0 -4px 16px rgba(0, 115, 230, 0.08);
+  margin-top: 60px;
+  font-size: 1rem;
+}
+.footer-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 0 18px;
+}
+.footer-left { font-weight: 600; letter-spacing: 0.5px; }
+.footer-center { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.footer-link {
+  color: #e0f7ff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.footer-link:hover { color: #fff; text-decoration: underline; }
+.footer-divider { color: #b3e0ff; margin: 0 8px; }
+.footer-right { display: flex; align-items: center; gap: 8px; }
+.footer-social img {
+  width: 22px; height: 22px;
+  filter: brightness(0) invert(1);
+  transition: filter 0.2s, transform 0.2s;
+  vertical-align: middle;
+}
+.footer-social:hover img {
+  filter: brightness(1.2) invert(0.9) sepia(1) hue-rotate(180deg) saturate(2);
+  transform: scale(1.1);
+}
+@media (max-width: 700px) {
+  .footer-content { flex-direction: column; align-items: flex-start; gap: 12px; text-align: left; }
+  .footer-center, .footer-right { justify-content: flex-start; }
+}
+    </style>
+</head>
+<body>
+
+
+       <div class="topnav" id="myTopnav" role="navigation" aria-label="Primary Navigation">
+        <a href="#" class="active" aria-current="page">Contact</a>
+        <a href="./index.html" >Home</a>
+        <a href="./phone.html">Phones</a>
+        <a href="./aboutto.html">About</a>
+        <a  class="icon" aria-label="Toggle navigation menu" onclick="toggleNav()">
+            &#9776;
+        </a>
+    </div>
+
+    <main class="container" role="main">
+        <header>
+            <img src="./Image/Logos/logo-png.png" alt="logo" class="logo-img">
+            <h1>Contact Us</h1>
+            <p>Have questions or feedback? We'd love to hear from you!</p>
+        </header>
+
+        <form id="contactForm" novalidate>
+            <label for="name">Full Name <span aria-hidden="true" style="color:#e74c3c;">*</span></label>
+            <input type="text" id="name" name="name" placeholder="Your full name" required aria-required="true" />
+
+            <label for="email">Email Address <span aria-hidden="true" style="color:#e74c3c;">*</span></label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" required aria-required="true" />
+
+            <label for="message">Message <span aria-hidden="true" style="color:#e74c3c;">*</span></label>
+            <textarea id="message" name="message" placeholder="Write your message here..." required aria-required="true"></textarea>
+
+            <button type="submit" aria-label="Send your message">Send Message</button>
+
+            <div class="success-message" role="alert" aria-live="polite" id="successMessage">
+                Thank you! Your message has been sent successfully.
+            </div>
+        </form>
+
+        <section class="developers-section" aria-label="Developers Team">
+            <h2>Meet the Developers</h2>
+            <div class="developers-grid">
+                <article class="developer-card" tabindex="0">
+                    <div class="developer-photo" aria-hidden="true">KY</div>
+                    <h3 class="developer-name">Kailash Yadav</h3>
+                    <p class="developer-role">Lead Frontend Developer</p>
+                    <p class="developer-desc">Expert in React, CSS animations, and UI/UX design, John ensures the site is visually stunning and user-friendly.</p>
+                </article>
+                <article class="developer-card" tabindex="0">
+                    <div class="developer-photo" aria-hidden="true">N.Kc</div>
+                    <h3 class="developer-name">Nabraj K.C</h3>
+                    <p class="developer-role">Backend Engineer</p>
+                    <p class="developer-desc">Specializes in server-side logic, APIs, and database management to keep the platform fast and reliable.</p>
+                </article>
+                <article class="developer-card" tabindex="0">
+                    <div class="developer-photo" aria-hidden="true">AY</div>
+                    <h3 class="developer-name">Aman Yadav</h3>
+                    <p class="developer-role">Full Stack Developer</p>
+                    <p class="developer-desc">Works across frontend and backend, integrating features and optimizing performance for seamless user experience.</p>
+                </article>
+                <article class="developer-card" tabindex="0">
+                    <div class="developer-photo" aria-hidden="true">NT</div>
+                    <h3 class="developer-name">Nimesh Thapa</h3>
+                    <p class="developer-role">UI/UX Designer</p>
+                    <p class="developer-desc">Designs intuitive interfaces and user journeys, focusing on accessibility and modern aesthetics.</p>
+                </article>
+                <article class="developer-card" tabindex="0">
+                    <div class="developer-photo" aria-hidden="true">TC</div>
+                    <h3 class="developer-name">Tekendra Chaudhary</h3>
+                    <p class="developer-role">JavaScript Specialist</p>
+                    <p class="developer-desc">Focuses on JavaScript frameworks and interactive elements, enhancing site responsiveness and engagement.</p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+        <footer class="site-footer">
+  <div class="footer-content">
+    <div class="footer-left">
+      <strong>Smartphone Market Insights</strong><br>
+      &copy; 2025 All rights reserved.
+    </div>
+    <div class="footer-center">
+      <a href="./contact.html " class="footer-link">Contact</a><!-- href="mailto:info@smartphonemarket.com" -->
+      <span class="footer-divider">|</span>
+      <a href="#" class="footer-link">Privacy Policy</a>
+      <span class="footer-divider">|</span>
+      <a href="./aboutto.html" class="footer-link">About</a>
+    </div>
+    <div class="footer-right">
+      <span>Follow us:</span>
+      <a href="https://x.com/" class="footer-social" aria-label="Twitter"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/twitter.svg" alt="Twitter" /></a>
+      <a href="https://www.facebook.com/" class="footer-social" aria-label="Facebook"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook" /></a>
+    </div>
+  </div>
+</footer>
+
+    <script>
+        // Form validation and success message display
+        const form = document.getElementById('contactForm');
+        const successMessage = document.getElementById('successMessage');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Simple validation
+            const name = form.name.value.trim();
+            const email = form.email.value.trim();
+            const message = form.message.value.trim();
+
+            if (!name || !email || !message) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+
+            // Basic email pattern check
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+
+            // Simulate form submission success
+            successMessage.style.display = 'block';
+
+            // Reset the form
+            form.reset();
+
+            // Optionally, hide the success message after 5 seconds
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+            }, 5000);
+        });
+        
+        function toggleNav() {
+  var nav = document.getElementById("myTopnav");
+  nav.classList.toggle("responsive");
+}
+
+// Keyboard accessibility for navbar toggle
+document.getElementById("navToggleBtn").addEventListener("keydown", function(e) {
+  if (e.key === "Enter" || e.key === " ") {
+    toggleNav();
+  }
+});
+
+
+    </script>
+
+</body>
+</html>
